@@ -10,6 +10,10 @@ mem_available = mem.available
 
 mem_used_percentage = float("{0:.2f}".format((mem_total - mem_available) / mem_total))
 
+mem_total = mem_total / 1024 / 1024
+
+mem_available = mem_available / 1024 / 1024
+
 temperatures = psutil.sensors_temperatures()
 
 print(cpu_percentage)
