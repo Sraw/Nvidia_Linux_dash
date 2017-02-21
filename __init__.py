@@ -1,6 +1,10 @@
 import psutil
 import subprocess
 import pprint
+import tornado.ioloop
+import tornado.web
+import os
+import json
 
 def fixed_float(value, decimal):
     _str = "{0:.%sf}" % (decimal)
@@ -36,9 +40,39 @@ pprint.pprint(temperatures)
 
 
 
-sp = subprocess.Popen(['nvidia-smi', '-q'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+#sp = subprocess.Popen(['nvidia-smi', '-q'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-out_str = sp.communicate()[0].decode()
-out_list = out_str.split('\n')
+#out_str = sp.communicate()[0].decode()
+#out_list = out_str.split('\n')
 
-pprint.pprint(out_list)
+#out_list = out_list[4:-2]
+
+#pprint.pprint(out_list)
+
+
+class MainHandler(tornado.web.RequestHandler):
+    def initialize(self):
+        pass
+    
+    def get(self):
+        cpu_percentage = psutil.cpu_percent(None, True)
+        self.render('index.html', title = "Nvidia-Linux-dash", cpu_percentage = cpu_percentage)
+        
+    def post(self):
+        cpu_percentage = psutil.cpu_percent(None, True)
+        self.set_header("content-type","application/json")
+        jsobj = {"result" : cpu_percentage}
+        self.write(json.dumps(jsobj))
+        self.finish()
+
+settings = {
+    "static_path": os.path.join(os.path.dirname(__file__), "static")
+}
+app = tornado.web.Application([
+    (r"/", MainHandler),
+    (r"/cpu_percent", MainHandler)
+], **settings)
+
+app.listen(8080)
+
+tornado.ioloop.IOLoop.current().start()
