@@ -1,5 +1,17 @@
 import psutil
 
+def fixed_float(value, decimal):
+    _str = "{0:.%sf}" % (decimal)
+    result = float(_str.format(value))
+    return result
+
+def convert2g(value):
+    result = value / 1024 / 1024 / 1024
+    result = fixed_float(result, 2)
+    return result
+    
+
+
 cpu_percentage = psutil.cpu_percent(0.01, True)
 
 mem = psutil.virtual_memory()
@@ -10,9 +22,9 @@ mem_available = mem.available
 
 mem_used_percentage = float("{0:.2f}".format((mem_total - mem_available) / mem_total))
 
-mem_total = mem_total / 1024 / 1024
+mem_total = convert2g(mem_total)
 
-mem_available = mem_available / 1024 / 1024
+mem_available = convert2g(mem_available)
 
 temperatures = psutil.sensors_temperatures()
 
