@@ -32,24 +32,6 @@ mem_available = convert2g(mem_available)
 
 temperatures = psutil.sensors_temperatures()
 
-print(cpu_percentage)
-print(mem_total)
-print(mem_available)
-print(mem_used_percentage)
-pprint.pprint(temperatures)
-
-
-
-#sp = subprocess.Popen(['nvidia-smi', '-q'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-#out_str = sp.communicate()[0].decode()
-#out_list = out_str.split('\n')
-
-#out_list = out_list[4:-2]
-
-#pprint.pprint(out_list)
-
-
 class MainHandler(tornado.web.RequestHandler):
     def initialize(self):
         pass
