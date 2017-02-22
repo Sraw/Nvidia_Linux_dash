@@ -29,8 +29,9 @@ $(function(){
             for(var i = 0; i < data["result"].length; i++)
             {
             	dps[data["result"].length - i - 1] = {
-            		y :data["result"][i],
-            		label : "CPU Core" + i.toString()
+            		y : data["result"][i],
+            		label : "CPU Core" + i.toString(),
+            		indexLabel : data["result"][i].toString()
             	}
             }
             chart.options.data[0].dataPoints = dps
