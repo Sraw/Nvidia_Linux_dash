@@ -11,6 +11,9 @@ $(function(){
 		axisY:{
 			maximum: 100,
 			minimum: 0
+		},
+		axisX:{
+			interval: 1,
 		}
 	});
 
