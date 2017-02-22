@@ -24,7 +24,7 @@ mem_total = mem.total
 
 mem_available = mem.available
 
-mem_used_percentage = float("{0:.2f}".format((mem_total - mem_available) / mem_total))
+mem_used_percentage = fixed_float(((mem_total - mem_available) / mem_total), 2)
 
 mem_total = convert2g(mem_total)
 
@@ -42,8 +42,21 @@ class MainHandler(tornado.web.RequestHandler):
         
     def post(self):
         cpu_percentage = psutil.cpu_percent(None, True)
+        
+        mem = psutil.virtual_memory()
+        mem_total = mem.total
+        mem_available = mem.available
+        mem_used_percentage = fixed_float(((mem_total - mem_available) / mem_total) * 100, 2)
+        mem_total = convert2g(mem_total)
+        mem_available = convert2g(mem_available)
+        
         self.set_header("content-type","application/json")
-        jsobj = {"result" : cpu_percentage}
+        jsobj = {
+            "cpu_percent" : cpu_percentage,
+            "mem_used_percent" : mem_used_percentage,
+            "mem_total" : mem_total,
+            "mem_available" : mem_available
+        }
         self.write(json.dumps(jsobj))
         self.finish()
 
@@ -52,7 +65,7 @@ settings = {
 }
 app = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/cpu_percent", MainHandler)
+    (r"/sys_info", MainHandler)
 ], **settings)
 
 app.listen(8080)
