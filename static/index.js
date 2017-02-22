@@ -3,14 +3,15 @@
 $(function(){
 	var chart = new CanvasJS.Chart("chartContainer",{
 		title :{
-			text: "Live Random Data"
+			text: "CPU Usage"
 		},			
 		data: [{
 			type: "bar"
 		}],
 		axisY:{
-			maximum: 100,
-			minimum: 0
+			maximum: 110,
+			minimum: 0,
+			interval: 10
 		},
 		axisX:{
 			interval: 1,
