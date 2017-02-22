@@ -47,7 +47,7 @@ $(function(){
             	dps_cpu[data["cpu_percent"].length - i - 1] = {
             		y : data["cpu_percent"][i],
             		label : "CPU Core" + i.toString(),
-            		indexLabel : data["cpu_percent"][i].toString()
+            		indexLabel : "{y}%"
             	}
             }
             chart_cpu.options.data[0].dataPoints = dps_cpu
@@ -56,7 +56,7 @@ $(function(){
             var dps_mem = [{
             	y : data["mem_used_percent"],
             	label : "Used Mem",
-            	indexLabel : data["mem_used_percent"].toString()
+            	indexLabel : "{y}%"
             }]
             chart_mem.options.data[0].dataPoints = dps_mem
             
