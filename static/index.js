@@ -105,7 +105,7 @@ $(function(){
             var dps_mem = [{
             	y : mem_used_percent,
             	label : "Used Mem",
-            	indexLabel : "{y}%"
+            	indexLabel : "{y}℃"
             }]
             chart_mem.options.data[0].dataPoints = dps_mem
     		
