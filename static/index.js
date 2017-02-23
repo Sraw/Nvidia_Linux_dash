@@ -108,12 +108,8 @@ $(function(){
             }]
             chart_mem.options.data[0].dataPoints = dps_mem
             
-            console.log(data["mem_total"])
-            console.log(data["mem_available"])
-            
-    		chart_cpu_percent.render()
-    		chart_cpu_temperature.render()
-    		chart_mem.render()
+            console.log(mem_total)
+            console.log(mem_available)
     		
     		//gpu
     		var name = data["gpu_info"]["name"]
@@ -128,6 +124,12 @@ $(function(){
             	indexLabel : "{y}%"
             }]
             chart_gpu.options.data[0].dataPoints = dps_mem
+            
+            
+            chart_cpu_percent.render()
+    		chart_cpu_temperature.render()
+    		chart_mem.render()
+    		chart_gpu.render()
         })
     }
 })
