@@ -91,7 +91,7 @@ $(function(){
             for(var i = 0; i < cpu_temperature.length; i++)
             {
             	dps_cpu_temperature[cpu_temperature.length - i - 1] = {
-            		y : cpu_temperature[i],
+            		y : cpu_temperature[i][1],
             		label : "Physical CPU Core" + i.toString(),
             		indexLabel : "{y}%"
             	}
@@ -117,7 +117,7 @@ $(function(){
     		var mem_total = data["gpu_info"]["mem_total"]
     		var mem_used_percent = data["gpu_info"]["mem_used_percent"]
     		var dps_gpu = [{
-            	y : usage,
+            	y : parseFloat(usage),
             	label : "GPU Used",
             	indexLabel : "{y}%"
             }]
