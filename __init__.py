@@ -68,6 +68,6 @@ app = tornado.web.Application([
     (r"/sys_info", MainHandler)
 ], **settings)
 
-app.listen(8080)
+app.listen(7777)
 
 tornado.ioloop.IOLoop.current().start()
