@@ -71,6 +71,7 @@ $(function(){
     
     function access_cpu_percent(){
         $.post('/sys_info', function(data) {
+        	console.log(data)
         	//cpu_percent
         	var cpu_percent = data["cpu_info"]["cpu_percent"]
         	var dps_cpu_percent = new Array(cpu_percent.length)
@@ -107,9 +108,6 @@ $(function(){
             	indexLabel : "{y}%"
             }]
             chart_mem.options.data[0].dataPoints = dps_mem
-            
-            console.log(mem_total)
-            console.log(mem_available)
     		
     		//gpu
     		var name = data["gpu_info"]["name"]
