@@ -86,8 +86,7 @@ class MainHandler(tornado.web.RequestHandler):
         pass
     
     def get(self):
-        cpu_percentage = psutil.cpu_percent(None, True)
-        self.render('index.html', title = "Nvidia-Linux-dash", cpu_percentage = cpu_percentage)
+        self.render('index.html', title = "Nvidia-Linux-dash")
         
     def post(self):
         cpu_info = get_cpu_info()
