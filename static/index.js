@@ -93,7 +93,7 @@ $(function(){
             	dps_cpu_temperature[cpu_temperature.length - i - 1] = {
             		y : cpu_temperature[i][1],
             		label : "Physical CPU Core" + i.toString(),
-            		indexLabel : "{y}%"
+            		indexLabel : "{y}℃"
             	}
             }
             chart_cpu_temperature.options.data[0].dataPoints = dps_cpu_temperature
@@ -105,7 +105,7 @@ $(function(){
             var dps_mem = [{
             	y : mem_used_percent,
             	label : "Used Mem",
-            	indexLabel : "{y}℃"
+            	indexLabel : "{y}%"
             }]
             chart_mem.options.data[0].dataPoints = dps_mem
     		
