@@ -67,6 +67,19 @@ def get_gpu_info():
          "mem_used_percent" : mem_used_percent
     }
     return gpu_dict
+    
+def exists_in_path(cmd):
+  # can't search the path if a directory is specified
+    assert not os.path.dirname(cmd)
+
+    extensions = os.environ.get("PATHEXT", "").split(os.pathsep)
+    for directory in os.environ.get("PATH", "").split(os.pathsep):
+        base = os.path.join(directory, cmd)
+        options = [base] + [(base + ext) for ext in extensions]
+        for filename in options:
+            if os.path.exists(filename):
+                return True
+    return False
 
 class MainHandler(tornado.web.RequestHandler):
     def initialize(self):
@@ -79,14 +92,16 @@ class MainHandler(tornado.web.RequestHandler):
     def post(self):
         cpu_info = get_cpu_info()
         mem_info = get_mem_info()
-        gpu_info = get_gpu_info()
+        if exists_in_path("nvidia-smi"):
+            gpu_info = get_gpu_info()
         
         self.set_header("content-type","application/json")
         jsobj = {
             "cpu_info" : cpu_info,
-            "mem_info" : mem_info,
-            "gpu_info" : gpu_info
+            "mem_info" : mem_info
         }
+        if gpu_info:
+            jsobj["gpu_info"] = gpu_info
         self.write(json.dumps(jsobj))
         self.finish()
 
