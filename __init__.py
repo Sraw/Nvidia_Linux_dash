@@ -40,7 +40,7 @@ def get_mem_info():
     mem = psutil.virtual_memory()
     mem_total = mem.total
     mem_available = mem.available
-    mem_used_percentage = fixed_float(((mem_total - mem_available) / mem_total), 2)
+    mem_used_percentage = fixed_float(((mem_total - mem_available) / mem_total) * 100, 2)
     mem_total = convert2g(mem_total, 'B')
     mem_available = convert2g(mem_available, 'B')
     return {
