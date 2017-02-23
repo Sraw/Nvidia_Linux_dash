@@ -121,7 +121,7 @@ $(function(){
             	label : "GPU Used",
             	indexLabel : "{y}%"
             }]
-            chart_gpu.options.data[0].dataPoints = dps_mem
+            chart_gpu.options.data[0].dataPoints = dps_gpu
             
             
             chart_cpu_percent.render()
